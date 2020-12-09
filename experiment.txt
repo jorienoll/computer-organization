@@ -1,0 +1,50 @@
+To execute this program from the terminal, enter the following two commands, where user changes variables x, y, and z to manipulate data size:
+
+g++ experiment.cpp -o main
+./main (x) (y) (z)
+
+For example,
+
+g++ experiment.cpp -o main
+./main 100 100 100
+
+
+
+This program processes two large chunks of data
+(e.g., a large 3D array and an array of self-defined structures with each structure at least 256 Bytes) respectively,
+where the array elements could be random. Then it tries different ways to traverse the array elements and stimulate
+program performance (i.e., running time), and calculates an average time of at least 5 experiments for each program.
+
+
+In the end, I created 12 experiments, each with different variables being manipulated to stimulate
+the program performance differently.
+
+
+For the first 3 experiments, I accessed the 3D arrays intArrays[][][] in row-major order, and traversed the array elements in a 1-stride, 2-stride, and 3-stride form.
+
+
+For the next 3 experiments, I accessed the 3D arrays intArrays[][][] in column-major order, and traversed the array elements in a 1-stride, 2-stride, and 3-stride form.
+
+
+For the next 3 experiments, I accessed the 3D array intArrays[][][] in depth-major order, and traversed the array elements in a 1-stride, 2-stride, and 3-stride form.
+
+
+For the first final 3 experiments, I accessed the structure array structures[], and traversed the array elements
+in a 1-stride, 2-stride, and 3-stride form.
+
+
+Numerous observations can be made by examining the running times of these experiments.
+
+
+First, it can be concluded that because stride-1 goes over every element in the array,
+stride-2 goes over every other element, and stride-3 goes over every third element,
+stride-1 always results in the slowest running time compared to stride-2, which is the second slowest running time, followed by stride-3, which is the fastest running time in all cases.
+
+
+Also, it can be concluded when evaluating the running time of experiments 10-12 that when accessing the array of independent structures, the running time is extremely low or at 0, depending on the data size entered, because the individual structures are not being accessed. The running time for these experiments will only be greater than 0 when very large data sizes are entered because running the loop on such a large data size results in a marginally small running time to loop, however in all data sizes entered there is 0 time spent accessing data in the structure array.
+
+
+Additionally, when the loop order in the 3D array is manipulated, it results in varying running times. When in depth-major order, it results in the slowest running times of the three loop orders (experiment 7-9). When in column-major order, it results in the middle running times (experiments 4-6). When in row-major form, it results in the fastest running times (experiments 1-3).
+
+
+The data size when you begin to observe significant running time differences in my programs is 15, which is most likely because when accessing smaller data sizes, there are too few instances of data being accessed, that the program does not produce a significant difference in running time between different experiments. Accessing data constitutes a majority of the total running time, with the time spent looping being so close to 0, it does not marginally affect the total running time like data accessing does. When the data sizes are smaller than 15, the stride-2 and stride-3 experiments are not getting the opportunity to hit enough that a significant difference can be seen between time differences, whereas the stride-1 experiments hit every iteration and will always have a significant running time, regardless of data size.
